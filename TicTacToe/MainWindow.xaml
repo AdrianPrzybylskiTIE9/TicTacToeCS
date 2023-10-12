@@ -26,15 +26,15 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
 
-            <Button x:Name="btn1" Content="" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0" Grid.Row="0" Click="playerMove" Height="110" Width="110" Background="#6a6be5" BorderThickness="0"/>
-            <Button x:Name="btn2" Content="" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.Row="0" Click="playerMove" Height="110" Width="110" Background="#6a6be5" BorderThickness="0"/>
-            <Button x:Name="btn3" Content="" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="2" Grid.Row="0" Click="playerMove" Height="110" Width="110" Background="#6a6be5" BorderThickness="0"/>
-            <Button x:Name="btn4" Content="" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0" Grid.Row="1" Click="playerMove" Height="110" Width="110" Background="#6a6be5" BorderThickness="0"/>
-            <Button x:Name="btn5" Content="" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.Row="1" Click="playerMove" Height="110" Width="110" Background="#6a6be5" BorderThickness="0"/>
-            <Button x:Name="btn6" Content="" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="2" Grid.Row="1" Click="playerMove" Height="110" Width="110" Background="#6a6be5" BorderThickness="0"/>
-            <Button x:Name="btn7" Content="" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0" Grid.Row="2" Click="playerMove" Height="110" Width="110" Background="#6a6be5" BorderThickness="0"/>
-            <Button x:Name="btn8" Content="" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.Row="2" Click="playerMove" Height="110" Width="110" Background="#6a6be5" BorderThickness="0"/>
-            <Button x:Name="btn9" Content="" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="2" Grid.Row="2" Click="playerMove" Height="110" Width="110" Background="#6a6be5" BorderThickness="0"/>
+            <Button x:Name="btn1" Content="" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0" Grid.Row="0" Click="playerMove" Height="110" Width="110" Background="#6a6be5" BorderThickness="0" FontSize="20"/>
+            <Button x:Name="btn2" Content="" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.Row="0" Click="playerMove" Height="110" Width="110" Background="#6a6be5" BorderThickness="0" FontSize="20"/>
+            <Button x:Name="btn3" Content="" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="2" Grid.Row="0" Click="playerMove" Height="110" Width="110" Background="#6a6be5" BorderThickness="0" FontSize="20"/>
+            <Button x:Name="btn4" Content="" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0" Grid.Row="1" Click="playerMove" Height="110" Width="110" Background="#6a6be5" BorderThickness="0" FontSize="20"/>
+            <Button x:Name="btn5" Content="" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.Row="1" Click="playerMove" Height="110" Width="110" Background="#6a6be5" BorderThickness="0" FontSize="20"/>
+            <Button x:Name="btn6" Content="" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="2" Grid.Row="1" Click="playerMove" Height="110" Width="110" Background="#6a6be5" BorderThickness="0" FontSize="20"/>
+            <Button x:Name="btn7" Content="" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0" Grid.Row="2" Click="playerMove" Height="110" Width="110" Background="#6a6be5" BorderThickness="0" FontSize="20"/>
+            <Button x:Name="btn8" Content="" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.Row="2" Click="playerMove" Height="110" Width="110" Background="#6a6be5" BorderThickness="0" FontSize="20"/>
+            <Button x:Name="btn9" Content="" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="2" Grid.Row="2" Click="playerMove" Height="110" Width="110" Background="#6a6be5" BorderThickness="0" FontSize="20"/>
         </Grid>
 
         <Grid Grid.Row="1" Width="400" Height="100">
@@ -42,7 +42,7 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
 
-            <Button x:Name="ResetButton" Content="Resetuj" HorizontalAlignment="Center" VerticalAlignment="Center" Height="50" Width="150"  Background="#6a6be5"  BorderThickness="0" FontSize="16" FontWeight="Bold"/>
+            <Button x:Name="ResetButton" Content="Resetuj" HorizontalAlignment="Center" VerticalAlignment="Center" Height="50" Width="150"  Background="#6a6be5"  BorderThickness="0" FontSize="16" FontWeight="Bold" Click="RestartGame" />
         </Grid>
     </Grid>
 

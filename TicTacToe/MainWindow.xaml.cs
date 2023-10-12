@@ -20,6 +20,7 @@ namespace TicTacToe
         Random random = new Random();
         int playerWinCount = 0;
         int cpuWinCount = 0;
+        bool gameStatus = false;
         List<Button> buttons;
 
         public MainWindow()
@@ -37,23 +38,27 @@ namespace TicTacToe
                 button.Content = "";
 
             }
+            gameStatus = true;
         }
 
         private void playerMove(object sender, RoutedEventArgs e)
         {
-            var button = (Button)sender;
-            currentPLayer = Player.X;
-            button.Content = currentPLayer.ToString();
-            button.IsEnabled = false;
-            buttons.Remove(button);
-            CheckGame();
-            cpuMove();
+            if (gameStatus)
+            {
+                var button = (Button)sender;
+                currentPLayer = Player.X;
+                button.Content = currentPLayer.ToString();
+                button.IsEnabled = false;
+                buttons.Remove(button);
+                CheckGame();
+                cpuMove();
+            }
 
         }
 
         private void cpuMove()
         {
-            if(buttons.Count > 0)
+            if(buttons.Count > 0  || gameStatus)
             {
                 int index = random.Next(buttons.Count);
                 currentPLayer = Player.O;
@@ -66,7 +71,40 @@ namespace TicTacToe
 
         private void CheckGame()
         {
-            
+            if (IsWinner(Player.X))
+            {
+                playerWinCount++;
+                MessageBox.Show("Gracz X wygrał!");
+                gameStatus = false;
+            }
+            else if (IsWinner(Player.O))
+            {
+                cpuWinCount++;
+                MessageBox.Show("Gracz O (CPU) wygrał!");
+                gameStatus = false;
+            }
+            else if (buttons.Count == 0)
+            {
+                MessageBox.Show("Remis!");
+                gameStatus = false;
+            }
+        }
+
+        private bool IsWinner(Player player)
+        {
+            if (
+                (btn1.Content == player.ToString() && btn2.Content == player.ToString() && btn3.Content == player.ToString()) ||
+                (btn4.Content == player.ToString() && btn5.Content == player.ToString() && btn6.Content == player.ToString()) ||
+                (btn7.Content == player.ToString() && btn8.Content == player.ToString() && btn9.Content == player.ToString()) ||
+                (btn1.Content == player.ToString() && btn4.Content == player.ToString() && btn7.Content == player.ToString()) ||
+                (btn2.Content == player.ToString() && btn5.Content == player.ToString() && btn8.Content == player.ToString()) ||
+                (btn3.Content == player.ToString() && btn6.Content == player.ToString() && btn9.Content == player.ToString()) ||
+                (btn1.Content == player.ToString() && btn5.Content == player.ToString() && btn9.Content == player.ToString()) ||
+                (btn3.Content == player.ToString() && btn5.Content == player.ToString() && btn7.Content == player.ToString()))
+            {
+                return true;
+            }
+            return false;
         }
 
         private void RestartGame(object sender, RoutedEventArgs e)

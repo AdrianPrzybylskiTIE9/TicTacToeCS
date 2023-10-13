@@ -37,6 +37,8 @@ namespace TicTacToe
             {
                 button.IsEnabled = true;
                 button.Content = "";
+                playerScore.Text = $"Player: {playerWinCount}";
+                cpuScore.Text = $"CPU: {cpuWinCount}";
 
             }
             gameStatus = true;
@@ -78,6 +80,7 @@ namespace TicTacToe
                 MessageBox.Show("Gracz X wygrał!");
                 gameStatus = false;
                 playerWinCount++;
+                playerScore.Text = $"Player: {playerWinCount}";
             }
             else if (IsWinner(Player.O))
             {
@@ -85,6 +88,7 @@ namespace TicTacToe
                 MessageBox.Show("Gracz O (CPU) wygrał!");
                 gameStatus = false;
                 cpuWinCount++;
+                cpuScore.Text = $"CPU: {cpuWinCount}";
             }
             else if (buttons.Count == 0)
             {

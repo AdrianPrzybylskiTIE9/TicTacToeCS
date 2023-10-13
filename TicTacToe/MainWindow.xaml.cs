@@ -32,8 +32,9 @@ namespace TicTacToe
         private void RestartGame()
         {
             buttons = new List<Button> { btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9 };
-            
-            foreach (Button button in buttons) {
+
+            foreach (Button button in buttons)
+            {
                 button.IsEnabled = true;
                 button.Content = "";
 
@@ -58,7 +59,7 @@ namespace TicTacToe
 
         private void cpuMove()
         {
-            if(buttons.Count > 0  || gameStatus)
+            if (buttons.Count > 0 && gameStatus)
             {
                 int index = random.Next(buttons.Count);
                 currentPLayer = Player.O;
@@ -76,12 +77,14 @@ namespace TicTacToe
                 playerWinCount++;
                 MessageBox.Show("Gracz X wygrał!");
                 gameStatus = false;
+                playerWinCount++;
             }
             else if (IsWinner(Player.O))
             {
                 cpuWinCount++;
                 MessageBox.Show("Gracz O (CPU) wygrał!");
                 gameStatus = false;
+                cpuWinCount++;
             }
             else if (buttons.Count == 0)
             {

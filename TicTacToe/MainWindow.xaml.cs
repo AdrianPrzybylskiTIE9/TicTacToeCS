@@ -1,15 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
 namespace TicTacToe
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         public enum Player
@@ -35,8 +33,8 @@ namespace TicTacToe
 
             foreach (Button button in buttons)
             {
+                button.Content = " ";
                 button.IsEnabled = true;
-                button.Content = "";
                 playerScore.Text = $"Player: {playerWinCount}";
                 cpuScore.Text = $"CPU: {cpuWinCount}";
 
@@ -44,7 +42,7 @@ namespace TicTacToe
             gameStatus = true;
         }
 
-        private void playerMove(object sender, RoutedEventArgs e)
+        private void PlayerMove(object sender, RoutedEventArgs e)
         {
             if (gameStatus)
             {
@@ -54,12 +52,12 @@ namespace TicTacToe
                 button.IsEnabled = false;
                 buttons.Remove(button);
                 CheckGame();
-                cpuMove();
+                CpuMove();
             }
 
         }
 
-        private void cpuMove()
+        private void CpuMove()
         {
             if (buttons.Count > 0 && gameStatus)
             {
@@ -74,9 +72,10 @@ namespace TicTacToe
 
         private void CheckGame()
         {
+
+            //MessageBox.Show($"btn1 = {btn1.Content} btn2 = {btn2.Content} btn3 = {btn3.Content} btn4 = {btn4.Content} btn5 = {btn5.Content} btn6 = {btn6.Content} btn7 = {btn6.Content} btn8 = {btn8.Content} btn9 = {btn9.Content}");
             if (IsWinner(Player.X))
             {
-                playerWinCount++;
                 MessageBox.Show("Gracz X wygrał!");
                 gameStatus = false;
                 playerWinCount++;
@@ -84,7 +83,6 @@ namespace TicTacToe
             }
             else if (IsWinner(Player.O))
             {
-                cpuWinCount++;
                 MessageBox.Show("Gracz O (CPU) wygrał!");
                 gameStatus = false;
                 cpuWinCount++;
@@ -99,20 +97,19 @@ namespace TicTacToe
 
         private bool IsWinner(Player player)
         {
-            if (
-                (btn1.Content == player.ToString() && btn2.Content == player.ToString() && btn3.Content == player.ToString()) ||
-                (btn4.Content == player.ToString() && btn5.Content == player.ToString() && btn6.Content == player.ToString()) ||
-                (btn7.Content == player.ToString() && btn8.Content == player.ToString() && btn9.Content == player.ToString()) ||
-                (btn1.Content == player.ToString() && btn4.Content == player.ToString() && btn7.Content == player.ToString()) ||
-                (btn2.Content == player.ToString() && btn5.Content == player.ToString() && btn8.Content == player.ToString()) ||
-                (btn3.Content == player.ToString() && btn6.Content == player.ToString() && btn9.Content == player.ToString()) ||
-                (btn1.Content == player.ToString() && btn5.Content == player.ToString() && btn9.Content == player.ToString()) ||
-                (btn3.Content == player.ToString() && btn5.Content == player.ToString() && btn7.Content == player.ToString()))
-            {
-                return true;
-            }
-            return false;
+            string playerSymbol = player.ToString();
+            return (
+                (btn1.Content == playerSymbol && btn2.Content == playerSymbol && btn3.Content == playerSymbol) ||
+                (btn4.Content == playerSymbol && btn5.Content == playerSymbol && btn6.Content == playerSymbol) ||
+                (btn7.Content == playerSymbol && btn8.Content == playerSymbol && btn9.Content == playerSymbol) ||
+                (btn1.Content == playerSymbol && btn4.Content == playerSymbol && btn7.Content == playerSymbol) ||
+                (btn2.Content == playerSymbol && btn5.Content == playerSymbol && btn8.Content == playerSymbol) ||
+                (btn3.Content == playerSymbol && btn6.Content == playerSymbol && btn9.Content == playerSymbol) ||
+                (btn1.Content == playerSymbol && btn5.Content == playerSymbol && btn9.Content == playerSymbol) ||
+                (btn3.Content == playerSymbol && btn5.Content == playerSymbol && btn7.Content == playerSymbol)
+            );
         }
+
 
         private void RestartGame(object sender, RoutedEventArgs e)
         {

@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
 
 namespace TicTacToe
 {
@@ -14,12 +11,13 @@ namespace TicTacToe
         {
             X, O
         }
-        Player currentPLayer;
+        Player currentPlayer;
         Random random = new Random();
         int playerWinCount = 0;
         int cpuWinCount = 0;
         bool gameStatus = false;
         List<Button> buttons;
+        string[,] board;
 
         public MainWindow()
         {
@@ -30,6 +28,7 @@ namespace TicTacToe
         private void RestartGame()
         {
             buttons = new List<Button> { btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9 };
+            board = new string[3, 3];
 
             foreach (Button button in buttons)
             {
@@ -47,10 +46,13 @@ namespace TicTacToe
             if (gameStatus)
             {
                 var button = (Button)sender;
-                currentPLayer = Player.X;
-                button.Content = currentPLayer.ToString();
+                currentPlayer = Player.X;
+                button.Content = currentPlayer.ToString();
                 button.IsEnabled = false;
+                int row = Grid.GetRow(button);
+                int col = Grid.GetColumn(button);
                 buttons.Remove(button);
+                UpdateBoard(row, col, currentPlayer);
                 CheckGame();
                 CpuMove();
             }
@@ -62,18 +64,19 @@ namespace TicTacToe
             if (buttons.Count > 0 && gameStatus)
             {
                 int index = random.Next(buttons.Count);
-                currentPLayer = Player.O;
+                currentPlayer = Player.O;
                 buttons[index].IsEnabled = false;
-                buttons[index].Content = currentPLayer.ToString();
+                buttons[index].Content = currentPlayer.ToString();
+                int row = Grid.GetRow(buttons[index]);
+                int col = Grid.GetColumn(buttons[index]);
                 buttons.RemoveAt(index);
+                UpdateBoard(row, col, currentPlayer);
                 CheckGame();
             }
         }
 
         private void CheckGame()
         {
-
-            //MessageBox.Show($"btn1 = {btn1.Content} btn2 = {btn2.Content} btn3 = {btn3.Content} btn4 = {btn4.Content} btn5 = {btn5.Content} btn6 = {btn6.Content} btn7 = {btn6.Content} btn8 = {btn8.Content} btn9 = {btn9.Content}");
             if (IsWinner(Player.X))
             {
                 MessageBox.Show("Gracz X wygrał!");
@@ -97,19 +100,41 @@ namespace TicTacToe
 
         private bool IsWinner(Player player)
         {
-            string playerSymbol = player.ToString();
-            return (
-                (btn1.Content == playerSymbol && btn2.Content == playerSymbol && btn3.Content == playerSymbol) ||
-                (btn4.Content == playerSymbol && btn5.Content == playerSymbol && btn6.Content == playerSymbol) ||
-                (btn7.Content == playerSymbol && btn8.Content == playerSymbol && btn9.Content == playerSymbol) ||
-                (btn1.Content == playerSymbol && btn4.Content == playerSymbol && btn7.Content == playerSymbol) ||
-                (btn2.Content == playerSymbol && btn5.Content == playerSymbol && btn8.Content == playerSymbol) ||
-                (btn3.Content == playerSymbol && btn6.Content == playerSymbol && btn9.Content == playerSymbol) ||
-                (btn1.Content == playerSymbol && btn5.Content == playerSymbol && btn9.Content == playerSymbol) ||
-                (btn3.Content == playerSymbol && btn5.Content == playerSymbol && btn7.Content == playerSymbol)
-            );
+            var playerSymbol = player.ToString();
+
+            for (int i = 0; i < 3; i++)
+            {
+                if (board[i, 0] == playerSymbol && board[i, 1] == playerSymbol && board[i, 2] == playerSymbol)
+                {
+                    return true;
+                }
+            }
+
+            for (int j = 0; j < 3; j++)
+            {
+                if (board[0, j] == playerSymbol && board[1, j] == playerSymbol && board[2, j] == playerSymbol)
+                {
+                    return true;
+                }
+            }
+
+            if (board[0, 0] == playerSymbol && board[1, 1] == playerSymbol && board[2, 2] == playerSymbol)
+            {
+                return true;
+            }
+
+            if (board[0, 2] == playerSymbol && board[1, 1] == playerSymbol && board[2, 0] == playerSymbol)
+            {
+                return true;
+            }
+
+            return false;
         }
 
+        private void UpdateBoard(int row, int col, Player player)
+        {
+            board[row, col] = player.ToString();
+        }
 
         private void RestartGame(object sender, RoutedEventArgs e)
         {
